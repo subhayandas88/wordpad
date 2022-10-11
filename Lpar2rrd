@@ -1,0 +1,34 @@
+Copy the file ****************************************
+scp tatasds@10.48.67.145:/tmp/lpar2rrd-agent-4.84-2.aix5.1.ppc.rpm /home/tatasds/
+rpm -i lpar2rrd-agent-4.00-0.aix5.1.ppc.rpm
+rpm -qa|grep lpar2rrd  ## Check the package is installed##
+useradd -s /usr/bin/ksh  -c "LPAR2RRD agent user" -m lpar2rrd
+echo "lpar2rrd" >> /var/adm/cron/cron.allow
+
+
+crontab -e lpar2rrd    #### Add the following Line and Save ##
+* * * * * /usr/bin/perl /opt/lpar2rrd-agent/lpar2rrd-agent.pl xx.xx.xx.xx > /var/tmp/lpar2rrd-agent.out 2>&1
+
+Check the connectivity :-
+telnet  xx.xx.xx.xx 8162
+
+Test the agent from command line from "lpar2rrd" user
+
+/usr/bin/perl /opt/lpar2rrd-agent/lpar2rrd-agent.pl -d xx.xx.xx.xx
+
+output will be like below :--
+
+Agent send     : yes : forced by -d 
+  Agent send slp: sending wait: 4
+  OS/HMC agent working for server: xx.xx.xx.xx
+  store file for sending is /var/tmp/lpar2rrd-agent-xx.xx.xx.xx-lpar2rrd.txt
+  
+==============================================LPAR2RRD User Management===============================================
+
+cat /etc/apache/.htpasswd ----------------------------------Location for user details for Lpar2rrd
+
+htpasswd /etc/apache/.htpasswd <username> -------------------- To create user & set new password for Lpar2rrd
+
+htpasswd -D /etc/apache/.htpasswd <username> ------------------- To delete existing user from Lpar2rrd
+
+
