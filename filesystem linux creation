@@ -1,0 +1,55 @@
+for disk in /dev/sdb /dev/sdc /dev/sdd /dev/sde /dev/sdf /dev/sdg /dev/sdh /dev/sdi /dev/sdj /dev/sdm /dev/sdk dev/sdn /dev/sdo /dev/sdp /dev/sdq /dev/sdr /dev/sds
+do
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk $disk
+t
+fd
+w
+EOF
+done
+
+=======================Filesystem Creation========================
+
+
+if [ -b /dev/sdb ]
+then
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk /dev/sdb
+n
+p
+1
+
+
+t
+8e
+p
+w
+EOF
+partprobe /dev/sdb
+pvcreate /dev/sdc1
+vgcreate tstvg /dev/sdb1
+lvcreate -l +100%Free -n testlv testvg
+mkfs -t ext4 /dev/vg01/lv_data
+if [ ! -d /data ]
+then
+mkdir /data
+fi
+uuid=`blkid /dev/mapper/vg01-lv_data|cut -d' ' -f2`
+echo "$uuid /data ext4 defaults 0 0" >> /etc/fstab
+mount -a
+fi 
+
+for disk in /dev/sdb
+do
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' << EOF | fdisk $disk
+n
+p
+1
+
+
+t
+8e
+p
+w
+EOF
+partprobe $disk
+done 
+ 
