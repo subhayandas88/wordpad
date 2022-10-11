@@ -1,0 +1,82 @@
+[root@xyz ~]# cat /etc/sysconfig/network-scripts/ifcfg-enp247s3
+TYPE=Ethernet
+BOOTPROTO=none
+DEFROUTE=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=enp247s3
+UUID=6ff2a338-1d91-432e-9177-596218e0715d
+DEVICE=enp247s3
+ONBOOT=yes
+DNS1=190.48.22.11
+DOMAIN=prd1.prdroot.net
+IPADDR=190.48.69.116
+PREFIX=24
+GATEWAY=190.48.69.1
+IPV6_PEERDNS=yes
+IPV6_PEERROUTES=yes
+IPV6_PRIVACY=no
+MTU=9000
+
+===============================================================
+
+[root@xyz]# cat ifcfg-enp247s4
+TYPE=Ethernet
+BOOTPROTO=dhcp
+DEFROUTE=yes
+PEERDNS=yes
+PEERROUTES=yes
+IPV4_FAILURE_FATAL=no
+IPV6INIT=yes
+IPV6_AUTOCONF=yes
+IPV6_DEFROUTE=yes
+IPV6_PEERDNS=yes
+IPV6_PEERROUTES=yes
+IPV6_FAILURE_FATAL=no
+IPV6_ADDR_GEN_MODE=stable-privacy
+NAME=enp247s4
+UUID=f90910da-a761-4138-a786-1eab542af9e7
+DEVICE=enp247s4
+ONBOOT=no
+
+===================================================================
+
+[root@xyz ~]# nmcli connection show
+NAME      UUID                                  TYPE            DEVICE
+enp247s3  6ff2a338-1d91-432e-9177-596218e0715d  802-3-ethernet  enp247s3
+enp247s4  f90910da-a761-4138-a786-1eab542af9e7  802-3-ethernet  --
+
+====================================================================================================================================
+nmcli con del 6ff2a338-1d91-432e-9177-596218e0715d
+
+nmcli con add type team con-name team0 ifname team0 config '{ "runner": {"name": "loadbalance"}}'
+
+nmcli connection modify team0 ipv4.addresses 190.48.69.116/24 ipv4.gateway 190.48.69.1 ipv4.dns 190.48.22.11 connection.autoconnect yes ipv4.method manual
+
+nmcli connection add type team-slave con-name team0-port1 ifname enp247s3 master team0
+
+nmcli connection add type team-slave con-name team0-port2 ifname enp247s4 master team0
+
+nmcli connection show
+
+nmcli device status
+
+nmcli connection down team0
+
+nmcli connection up team0
+
+systemctl restart network
+
+teamdctl team0 state
+
+nmcli device disconnect enp247s3
+
+teamnl team0 ports
+
+
+=====================================================================================================================================
+
