@@ -1,0 +1,151 @@
+#! /bin/ksh
+
+User="snaptest"              # Pure user on the FlashArray
+
+Array="20021.17.140"        # Pure FlashArray, hostname or IP address
+
+SrcPG="Tryg-Ora-Prod-DB-PG"  # Source Protection Group that contains data & redo
+
+SUFFIX=`date +%s`
+
+LOGFILE=/tmp/tia.out_`date '+%d'-'%m'-'%Y'_'%H'-'%M'`
+
+###############################SNAPSHOT_CREATION######################################
+
+puresnap() {
+
+# The snapshot will include the suffix of Unix epoch time
+
+
+
+ssh ${User}@${Array} purepgroup snap --suffix DM1-$SUFFIX ${SrcPG} --apply-retention
+
+}
+
+###############################UNMOUNTING_FILESYSTEM######################################
+
+unmountfs() {
+ct=$(ps -ef|grep -w ora_smon_$ORACLE_SID|grep -v grep)
+if [ "${#ct}" -eq 0 ]; then
+ #Replace the following with relevant mount details for your environment
+ 
+umount -f /data/ora_data21
+umount -f /data/ora_temp21
+umount -f /data/ora_arch21
+umount -f /data/ora_redo21
+umount -f /data/ora_redo22
+else
+  echo "Cannot unmount, check the usage on the mount !" >> $LOGFILE
+  exit -1
+fi
+}
+
+###############################MOUNTING SNAPSHOT######################################
+
+mountsnap() {
+
+echo "Copying data volume 1 snapshot onto cloned data volume 1"
+
+ssh ${User}@${Array} purevol copy --overwrite ${SrcPG}.DM1-$SUFFIX.OS-TRYG-xyz2ORATSTA001-VG/TRYG-xyz2ORATSTA001-T1-V2 TRYG-xyz2ORATSTA001-T1-TRGT-V2
+
+echo "Copying redo volume 2 snapshot onto cloned date volume 2"
+
+ssh ${User}@${Array} purevol copy --overwrite ${SrcPG}.DM1-$SUFFIX.OS-TRYG-xyz2ORATSTA001-VG/TRYG-xyz2ORATSTA001-T1-V3 TRYG-xyz2ORATSTA001-T1-TRGT-V3
+
+echo "Copying redo volume 3 snapshot onto cloned date volume 3"
+
+ssh ${User}@${Array} purevol copy --overwrite ${SrcPG}.DM1-$SUFFIX.OS-TRYG-xyz2ORATSTA001-VG/TRYG-xyz2ORATSTA001-T1-V4 TRYG-xyz2ORATSTA001-T1-TRGT-V4
+
+echo "Copying redo volume 4 snapshot onto cloned date volume 4"
+
+ssh ${User}@${Array} purevol copy --overwrite ${SrcPG}.DM1-$SUFFIX.OS-TRYG-xyz2ORATSTA001-VG/TRYG-xyz2ORATSTA001-T1-V5 TRYG-xyz2ORATSTA001-T1-TRGT-V5
+
+echo "Copying redo volume 5 snapshot onto cloned date volume 5"
+
+ssh ${User}@${Array} purevol copy --overwrite ${SrcPG}.DM1-$SUFFIX.OS-TRYG-xyz2ORATSTA001-VG/TRYG-xyz2ORATSTA001-T1-V6 TRYG-xyz2ORATSTA001-T1-TRGT-V6
+
+}
+
+###############################MOUNTING_FILESYSTEM######################################
+
+mountfs() {
+#Replace the following with relevant mount details for your environment
+mount /data/ora_data21
+mount /data/ora_temp21
+mount /data/ora_arch21
+mount /data/ora_redo21
+mount /data/ora_redo22
+}
+echo "Taking snapshot of volumes" > $LOGFILE
+puresnap >> $LOGFILE
+if [ $? -ne 0 ]
+then
+echo "Could not Execute Snapshot Creation Script successfully" >> $LOGFILE
+echo "Snapshot Mount Script executed with Error.\n\nHence Snap cloning for puresnap creation failed at `date '+%d'-'%m'-'%y','%H':'%M'`"|mailx -s "Snap Cloning for TIARAP Status" -r xyz2snpaix01@xyz.de subhayan.das@xyz.de zennith.devish@xyz.de tamal.sett@xyz.de satadru.das@xyz.de parashar.ramendra@cts.de
+exit 0
+else
+echo "Snapshot Mount Script executed successfully" >> $LOGFILE
+su - oracle -c "/opt/oracle/TCS/script/Tiarap_ECP_POC/shut_oldDB.sh" >> $LOGFILE
+if [ $? -ne 0 ]
+then
+echo "Could not Bring down the Database successfully" >> $LOGFILE
+echo "Snapshot Mount Script executed with Error.\n\nHence Snap cloning for Database Down failed at `date '+%d'-'%m'-'%y','%H':'%M'`"|mailx -s "Snap Cloning for TIARAP Status" -r xyz2snpaix01@xyz.de subhayan.das@xyz.de zennith.devish@xyz.de tamal.sett@xyz.de satadru.das@xyz.de parashar.ramendra@cts.de
+exit 0
+else
+echo "Database Brought down successfully" >> $LOGFILE
+#sdate=$(date +"%s")
+echo "Unmounting filesystems...." >> $LOGFILE
+unmountfs >> $LOGFILE
+if [ $? -ne 0 ]
+then
+echo "Could not Unmount filesystem successfully" >> $LOGFILE
+echo "Snapshot Mount Script executed with Error.\n\nHence Snap cloning for filesystem Unmount failed at `date '+%d'-'%m'-'%y','%H':'%M'`"|mailx -s "Snap Cloning for TIARAP Status" -r xyz2snpaix01@xyz.de subhayan.das@xyz.de zennith.devish@xyz.de tamal.sett@xyz.de satadru.das@xyz.de parashar.ramendra@cts.de
+exit 0
+else
+echo "Filesystem Unmounted successfully" >> $LOGFILE
+echo "Taking snapshot of volumes" >> $LOGFILE
+mountsnap >> $LOGFILE
+if [ $? -ne 0 ]
+then
+echo "Could not mount Snapshot successfully" >> $LOGFILE
+echo "Snapshot Mount Script executed with Error.\n\nHence Snap cloning for puresnap mount failed at `date '+%d'-'%m'-'%y','%H':'%M'`"|mailx -s "Snap Cloning for TIARAP Status" -r xyz2snpaix01@xyz.de subhayan.das@xyz.de zennith.devish@xyz.de tamal.sett@xyz.de satadru.das@xyz.de parashar.ramendra@cts.de
+exit 0
+else
+echo "Mounted Snapshot successfully" >> $LOGFILE
+echo "Mounting filesystems ..." >> $LOGFILE
+mountfs >> $LOGFILE
+if [ $? -ne 0 ]
+then
+echo "Could not mount Filesystem successfully" >> $LOGFILE
+echo "Snapshot Mount Script executed with Error.\n\nHence Snap cloning for Filesystem Mounting failed at `date '+%d'-'%m'-'%y','%H':'%M'`"|mailx -s "Snap Cloning for TIARAP Status" -r xyz2snpaix01@xyz.de subhayan.das@xyz.de zennith.devish@xyz.de tamal.sett@xyz.de satadru.das@xyz.de parashar.ramendra@cts.de
+exit 0
+else
+echo "Mounted Filesystem successfully" >> $LOGFILE
+echo "Changing Ownership of DB Filesystem" >> $LOGFILE
+chown -R oracle:dba /data/ora_* >> $LOGFILE
+###########################################STARTING_DATABASE##############################
+echo "TIARAP Database is starting" >> $LOGFILE
+su - oracle -c "/opt/oracle/TCS/script/Tiarap_ECP_POC/start_Tiarap.sh" >> $LOGFILE
+if [ $? -ne 0 ]
+then
+echo "Could not start Database_TIARAP successfully" >> $LOGFILE
+echo "Snapshot Mount Script executed with Error.\n\nHence Snap cloning for TIARAP DB Startup Failed failed at `date '+%d'-'%m'-'%y','%H':'%M'`"|mailx -s "Snap Cloning for TIARAP Status" -r xyz2snpaix01@xyz.de subhayan.das@xyz.de zennith.devish@xyz.de tamal.sett@xyz.de satadru.das@xyz.de parashar.ramendra@cts.de
+exit 0
+else
+echo "TIARAP Database Started successfully" >> $LOGFILE
+echo "TIAPOC Database is starting" >> $LOGFILE
+su - oracle -c "/opt/oracle/TCS/script/Tiarap_ECP_POC/start_Tiapoc_DBIdChng.sh" >> $LOGFILE
+if [ $? -ne 0 ]
+then
+echo "Could not start Database_TIAPOC successfully" >> $LOGFILE
+echo "Snapshot Mount Script executed with Error.\n\nHence Snap cloning for TIAPOC DB Startup failed at `date '+%d'-'%m'-'%y','%H':'%M'`"|mailx -s "Snap Cloning for TIARAP Status" -r xyz2snpaix01@xyz.de subhayan.das@xyz.de zennith.devish@xyz.de tamal.sett@xyz.de satadru.das@xyz.de parashar.ramendra@cts.de
+exit 0
+fi
+fi
+fi
+fi
+fi
+fi
+fi
+echo "Databases Cloned successfully `date '+%d'-'%m'-'%y','%H':'%M'`"|mailx -s "Snap Cloning for TIARAP Status" -r xyz2snpaix01@xyz.de subhayan.das@xyz.de zennith.devish@xyz.de tamal.sett@xyz.de satadru.das@xyz.de parashar.ramendra@cts.de
+
