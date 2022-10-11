@@ -1,0 +1,97 @@
+
+lspath | grep Enabled | wc -l........to find lspath
+
+lspv | wc -l.......to find pvs.
+
+lspath -s Enabled|wc -l..........count for enabled MPIO paths.
+
+cfgmgr -v...to update added Hdisk.
+lscfg -vl hdiskname................ will give you the LUN ID associated with the Hard Disk.
+
+lscfg -vl hdisk0...............to check the LUN ID
+
+chvg -g vgname ...to allocate hdisk space (PP)newly added to VG.
+
+lscfg -vpl/vl hdisk12.......to check LUN id.
+
+lscfg -vpl/vl fcs0..........to check fibre Channel Network Id.
+
+bootinfo -s hdisk15..... to get bootinformation
+
+lsdev -l hdisk0 -F parent
+
+lspath ..........will show all paths to the server from VIOS.
+lsdev -p fscsi
+***********************Filesystem utilization****************
+
+ [ for i in `lspv|awk '{print $1}'`
+        do echo $i:
+        lspath -l $i
+        done
+
+]....................script for finding the MPIO paths.
+
+ lsvg -P vgname  ..........to check the mirror pool attocated to hdisks
+ 
+ lspath -l hdiskname.....to find paths status of a harddisk.
+ 
+ 
+lspath | grep Enabled | wc -l
+lspv | wc -l
+
+ lsdev -l hdisk0 -F parent ---- Find the parent device of hdisk0
+ lsvg -o|lsvg -il
+ lsvg -o|lsvg -ip
+
+lsdev -p fscsi0 --- Find the child devices of fscsi0
+
+echo "cvai" | kdb | grep vscsi ..................to check VIO mapping from the server.
+
+To find the connection of all paths:-
+lspath -l hdisk1 -F "status:name:path_id:parent:connection"
+
+errpt -aj identifier name
+
+Filesystem increased as per requirement
+
+ Multipath in linux:-
+ 
+ ~# for host in $(ls -1d /sys/class/fc_host/*); do echo "1" > ${host}/issue_lip; done
+
+~# for host in $(ls -1d /sys/class/scsi_host/*); do echo "- - -" > ${host}/scan ; done
+ 
+ =======================================LINUX HBA++++++++++++++++
+ lspci -nn | grep -i hba
+ 
+ ls -l /sys/class/fc_host
+ 
+ lspci -vvv -s 04:00.1 |grep -i "Kernel Driver"
+ 
+https://arkit.co.in/check-hba-firmware-version-info-linux/
+ 
+For checking server LUN Paths to SAN Device  
+---------------------------------------------------
+for disk in `lspv|awk '{print $1}'`;do path=`lsmpio -l $disk|tail -n +3|wc -l`;echo "$disk: $path paths";done
+for disk in `lspv|awk '{print $1}'`;do path=`lsmpio -l $disk|grep "Enabled"|wc -l`;echo "$disk: $path paths";done
+
+for disk in `lspv|awk '{print $1}'`;do path=`lsmpio -l $disk|grep "Enabled"|wc -l`;echo "$disk: $path paths";done
+
+for i in `lspv|awk '{print $1}'`
+        do echo $i:
+        lsattr -El $i|grep -E "algorithm|reserve_policy"
+        done
+
+============================Disk Utilization script===========================
+#!/bin/bash
+CURRENT=$(df / | grep / | awk '{ print $5}' | sed 's/%//g')
+THRESHOLD=90
+
+if [ "$CURRENT" -gt "$THRESHOLD" ] ; then
+    mail -s 'Disk Space Alert' mailid@domainname.com << EOF
+Your root partition remaining free space is critically low. Used: $CURRENT%
+EOF
+fi
+===================================================Lqueryvg======================
+lqueryvg -p hdisk0 -v ------------------------Will tell the VGVID
+lqueryvg -p hdisk0 -L ------------------------Will tell all lvname with ID
+lqueryvg -p hdisk3 -P ------------------------Will tell you the PVID of the PVs present inside the VG.
