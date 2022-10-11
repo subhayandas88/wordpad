@@ -1,0 +1,363 @@
+===================Linux Tutorials=================================
+http://bitc.bme.emory.edu/~lzhou/blogs/?p=203
+http://chschneider.eu/linux/server/
+http://linux.die.net/man/5/exports
+http://www.unixmantra.com/
+http://www.tecmint.com/
+http://www.arkit.co.in
+http://www.unixmen.com/
+http://www.sysaix.com
+http://www.learnitguide.com/
+http://www.linuxnix.com/find-ram-size-in-linuxunix/
+http://www.howtoaix.blogspot.in
+http://aix4admins.blogspot.com
+http://aixhealthcheck.com
+https://www.thegeekdiary.com/category/linux/centos-rhel-7/
+http://www.unixarena.com/category/rhel7
+http://www.unixarena.com/2015/05/how-to-deploy-vcsa-6-0-on-vmware-workstation.html
+http://www.nextstep4it.com/l2-l3-linux-system-admin-interview-questions/
+https://www.ravellosystems.com/ravello-free-signup
+http://suresh-chandra.blogspot.com/
+http://www.aiotestking.com/ibm/
+http://www.thegeekstuff.com/2009/09/unix-sed-tutorial-printing-file-lines-using-address-and-patterns/
+----------------------------------OSLEVEL------------------------------------
+https://www.ibm.com/developerworks/community/blogs/brian/entry/how_to_determine_why_your_aix_oslevel_is_downlevel_and_a_script_to_help?lang=en
+---------------------------Mrepo-----------------------------------------------
+http://idmoim.blogspot.com/2015/07/how-to-setup-mrepo-redhat-7.html
+http://www.itzgeek.com/
+http://ibmpoweraix.blogspot.com/2014/11/perfpmr-for-aix-performance-issue.html
+
+------------------------------Reposync--------------------------------
+https://access.redhat.com/solutions/23016 
+---------------------------------NIM_MIGRATION_OS------------------------------------------------
+http://aix4admins.blogspot.com/2011/05/lppsource-lppsource-is-directory.html
+http://stromberg.dnsalias.org/~strombrg/Useful-AIX-commands.html
+
+-------------------------------Audit-----------------------------------------------------------
+https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Defining_Audit_Rules_and_Controls.html
+
+--------------------------openstack Links----------------------------------------------------------
+http://dbaxps.blogspot.com/2016/11/packstack-install-rdo-newton-with.html
+http://docs.openstack.org/user-guide/cli-cheat-sheet.html
+https://kb.iweb.com/hc/en-us/articles/230247448-Resetting-your-cloud-server-password-CentOS-
+------------------------------------Ultimatix----------------------------------
+https://knowmax.ultimatix.net/sites/it_is-hsd/ITIS%20TEG/Lists/Request%20for%20ITIS%20Lab/AllItems.aspx
+
+--------------------------------------Puppet---------------------------------
+http://www.ehowstuff.com/how-to-setup-open-source-puppet-server-and-puppet-agent-on-centos-6-5/
+http://slashroot.in/puppet-tutorial-how-does-puppet-work
+http://slashroot.in/puppet-tutorial-installing-puppet-master-and-puppet-agent
+http://slashroot.in/puppet-tutorial-configuring-puppet-agent
+http://slashroot.in/documentation
+----------------------------------------------Python---------------------------------------------
+www.programiz.com
+=====================================================RHEL=================================================================
+https://access.redhat.com/solutions/62949
+https://access.redhat.com/solutions/1519813
+https://www.tecmint.com/manage-multiple-lvm-disks-using-striping-io/ 
+http://nokitel.im/index.php/2016/11/10/how-to-manage-windows-server-2016-with-ansible-active-directory/
+
+This is documented in the official syslog-ng documentation at: 
+https://syslog-ng.com/blog/installing-latest-syslog-ng-on-rhel-and-other-rpm-distributions/ 
+Search for the heading: "Installing syslog-ng on RHEL and CentOS 7" - from there you will find step-by-step instructions. 
+
+---------------------------------------IBM-----------------------------------------
+https://www-947.ibm.com/support/servicerequest/createSR.action
+https://www.ibm.com/developerworks/aix/library/aix-toolbox/alpha.html
+https://www-947.ibm.com/support/servicerequest/problemDescriptionSelect.action?srNumber=40003&branch=010&retainCountryCode=678&sourceAppl=XSR&sourceNode=prNode2&sourceTranId=2077081489136419317&draft=0
+https://www.ibm.com/developerworks/community/wikis/home?lang=en#!/wiki/Power Systems/page/PowerVM Virtualization Performance Advisor
+
+==================================Scripting RHEL==================================
+https://linoxide.com/linux-shell-script/login-logout-scripts/
+
+==========================================AIX Tunning===================================================
+https://www.ibm.com/developerworks/aix/library/au-aix7memoryoptimize1/index.html
+https://aixexpert.wordpress.com/aix/performance/
+https://www.ibm.com/developerworks/aix/library/au-vmm/index.html
+https://www-01.ibm.com/support/docview.wss?uid=swg21328602
+http://aixdvp.blogspot.com/2013/04/aix-performance-tuning_8361.html
+http://ibmsystemsmag.com/aix/administrator/networks/network_tuning/
+http://www.capacityreports.net/AIX_Blog/index.php/monitor-and-tune-aix-io
+https://www-01.ibm.com/support/docview.wss?uid=isg3T1025572
+
+
+=============================================================AIX Migration===================================
+http://docs.gz.ro/aix-savevg-plus-restvg.html
+https://access.redhat.com/solutions/179753
+https://www.ibm.com/developerworks/community/blogs/brian/entry/script_to_migrate_aix_users_and_groups_to_linux8?lang=en
+
+=================================================LDAP============================================
+https://www.learnitguide.net/2016/01/configure-openldap-server-on-rhel7.html
+https://www.tecmint.com/setup-ldap-server-and-configure-client-authentication/
+https://www.certdepot.net/rhel7-configure-ldap-directory-service-user-connection/
+https://www.itzgeek.com/how-tos/linux/centos-how-tos/step-step-openldap-server-configuration-centos-7-rhel-7.html
+http://www.zytrax.com/books/ldap/
+https://www.itzgeek.com/how-tos/linux/centos-how-tos/step-step-openldap-server-configuration-centos-7-rhel-7.html/2
+https://www.itzgeek.com/how-tos/linux/centos-how-tos/migrate-local-users-ldap-accounts.html
+https://www.learnitguide.net/2017/11/how-to-create-ldap-users-and-groups.html
+
+=================================================Redhat OS Backup================================================
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-relax-and-recover_rear
+
+==================================================
+
+http://arkit.co.in/linux/pxe-boot-server-configuration/
+http://arkit.co.in/linux/rsyslog-server/
+http://www.prohackerss.tk/
+====================================================================
+https://access.redhat.com/labs/rhelupgradehelper/
+https://access.redhat.com/solutions/69319
+https://www.tecmint.com/enable-redhat-subscription-reposiories-and-updates-for-rhel-7/
+https://access.redhat.com/documentation/en-us/red_hat_subscription_management/1/html/rhsm/registering-cmd
+https://access.redhat.com/solutions/637583
+===============================================================
+https://www.linuxtechi.com/install-rear-migration-recovery-tool-centos-7-rhel-7/
+https://access.redhat.com/solutions/198693
+https://access.redhat.com/solutions/198693
+https://www.tecmint.com/redo-backup-and-recovery-tool-to-backup-and-restore-linux-systems/
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/installation_guide/chap-anaconda-boot-options
+https://www.linuxtechi.com/install-rear-migration-recovery-tool-centos-7-rhel-7/
+https://linoxide.com/how-tos/add-static-route-linux/
+https://www.scribd.com/document/332797127/Nim
+https://linoxide.com/linux-how-to/14-tcpdump-commands-capture-network-traffic-linux/
+http://manualzz.com/doc/21994079/ibm-powerha-systemmirror-7.1-for-aix-front-cover
+https://www.ibm.com/developerworks/aix/library/au-aix-recovering-resource-failure-in-cluster/index.html
+https://www.ibm.com/developerworks/aix/library/au-aix-powerha-cluster-migration/index.html
+
+------------------------------------------------------------------------------
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/high_availability_add-on_reference/ch-pcscommand-haar
+https://www.itzgeek.com/how-tos/linux/centos-how-tos/configure-high-avaliablity-cluster-on-centos-7-rhel-7.html
+https://www.ibm.com/developerworks/aix/library/au-aix7networkoptimize3/index.html
+http://www-01.ibm.com/support/docview.wss?uid=isg3T1012104
+
+======================================================================USB Mounting===========
+
+https://www-01.ibm.com/support/docview.wss?uid=ibm10715609
+
+=============================VIOS-===================================================
+https://www-01.ibm.com/support/docview.wss?uid=isg3T1013047
+https://www-01.ibm.com/support/docview.wss?uid=isg3T1022635
+
+============================================lqueryvg====================
+http://www.unixmantra.com/2013/04/aix-tips-and-tricks-part-v.html
+https://www.ahinc.com/support/aix-101/file-commands/#lqueryvg
+
+===========================================yum configuration in AIX===========================
+http://kb.ictbanking.net/article.php?id=525&oid=1
+
+=======================================================Scripts=========================================
+https://developer.ibm.com/articles/au-sshsecurity/
+=======================================================AME===============================
+https://www.ibm.com/support/knowledgecenter/en/ssw_aix_72/performance/intro_ame_process.html
+
+==========================================================trace file================================
+https://unix.stackexchange.com/questions/132711/using-port-587-with-sendmail
+https://www.smtp2go.com/setupguide/unix-sendmail/
+https://access.redhat.com/solutions/60803
+
+===================================Ip address change in HMC Console===================================
+
+https://www.ibm.com/developerworks/community/blogs/talor/entry/restartrmc?lang=en 
+ 
+======================================================================================================
+https://developer.ibm.com/tutorials/l-awk1/
+
+=====================================================Reposync======================================
+https://www.tecmint.com/setup-local-http-yum-repository-on-centos-7/
+https://docs.microsoft.com/en-us/azure/virtual-machines/workloads/redhat/redhat-rhui
+
+========================Bonding===============================================================
+cat /proc/net/bonding/bond0
+append initrd=initrd.img inst.ks=http://10.32.5.1/mnt/archive/RHEL-7/7.x/Server/x86_64/kickstarts/ks.cfg
+====================================IBM Licensing site=================================
+http://www-912.ibm.com/pod/pod
+https://www.ibm.com/servers/eserver/ess/ProtectedServlet.wss
+======================================================NTP=============================
+http://systemadmineasy.blogspot.com/2009/10/changing-time-zone-in-linux-and-aix.html
+=========================================Linux ACL=========================================
+
+https://www.tecmint.com/nmon-analyze-and-monitor-linux-system-performance/
+https://www.2daygeek.com/how-to-configure-access-control-lists-acls-setfacl-getfacl-linux/
+
+=====================================Redhat bugs=============================================
+https://access.redhat.com/solutions/5542661
+https://access.redhat.com/solutions/1756193
+
+=================================Credentials Unix=========================================
+Passw0rd@123
+Tryg@1234
+C0mplex@1
+We1c0meTc$@9812
+We1c0me8kp@8844
+
+
+
+====================================ECP VPN===================================================
+VPN URL : fiecpvpn.tcsecp.com
+User ID : 564629
+Password : Tcscloud@12345
+
+Jump Server : 172.21.32.12 
+ 
+User ID : TCSECP\564629
+Password : Tcscloud@12345
+
+=====================================ECP Credentials====================================
+
+User - c3admin
+Pass - 0pen$ource
+
+root
+TCSlogon@12345/welcome1
+
+========================================================================================
+ 
+echo 1 > /sys/block/sdg/device/rescan 
+multipathd resize map PX2origlogB-pv1 
+
+=========================================CLuster Config-PVID Snapshot Migration==============
+http://kb.ictbanking.net/article.php?id=472 
+perl -e 'print pack("H*","00fbc9783f6cdecc");' > /tmp/pvid
+
+cat /tmp/pvid | dd of=/dev/hdisk3 bs=1 seek=128 `
+
+=========================Office 365 ===========================
+https://portal.office.com
+
+https://office365onboarding.fresco.me/login 
+ 
+==============================CPR-Registration============================
+https://ihcph.kk.dk/indhold/cpr-registration-2 
+
+=================================Logrotate==================================================
+https://www.ibm.com/support/pages/opensource-logrotate-utility-aix
+
+=====================================AIX Firmware Upgrade===================================
+https://www.ibm.com/support/pages/server-firmware-update-and-upgrade-instructions
+https://www.ibm.com/support/knowledgecenter/en/POWER5/ipha5_p5/fix_aix_diags.htm
+https://delivery04.dhe.ibm.com/sar/CMA/SFA/08zpk/2/7063-CR1_OpenPowerReadme.op825.42.xhtml#__RefHeading___Toc2705_315426917
+https://delivery04.dhe.ibm.com/sar/CMA/SFA/08zpk/2/7063-CR1_OpenPowerReadme.op825.42.xhtml 
+https://www.ibm.com/support/knowledgecenter/8247-21L/p8hai/p8hai_upgrades_enh.htm
+https://www.ibm.com/support/pages/hmcs-bmc-ipmi-ip-access-control-and-port-control
+https://archive.midrange.com/midrange-l/201911/msg00610.html
+https://delivery04.dhe.ibm.com/sar/CMA/SFA/077mp/0/7063-CR1_OpenPowerReadme.v1.5.xhtml
+
+========================================IOSTAT=========================================================
+https://www.ibm.com/support/knowledgecenter/ssw_aix_72/i_commands/iostat.html
+
+========================================================HMC============================================
+http://aix4admins.blogspot.com/2015/06/hmc-update-hmc-upgrade-remote-hmc.html?_sm_au_=iVV1FwPN5rS5FsVfRC7JKK3Qs6qTM
+
+====================================================Redhat-yum-Sendmail=======================================
+/sbin/chkconfig --list sendmail
+
+https://www.thegeekdiary.com/how-to-change-the-default-kernel-boot-from-old-kernel-in-centos-rhel-8/https://www.thegeekdiary.com/how-to-change-the-default-kernel-boot-from-old-kernel-in-centos-rhel-8/
+
+https://www.thegeekdiary.com/centos-rhel-6-how-to-password-protect-single-user-mode/
+
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/deployment_guide/sec-working_with_yum_cache
+
+https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/deployment_guide/sec-yum_repository
+
+
+-===========================AIX_NFS==================================================================
+https://www.ibm.com/support/pages/how-determine-version-nfs
+
+======================================SUDO============================================================
+https://www.sudo.ws/download.html
+https://serverfault.com/questions/17814/how-can-i-allow-one-user-to-su-to-another-without-allowing-root-access
+https://emarcel.com/oracle-user-account-on-linux-good-practice/
+https://apple.stackexchange.com/questions/82438/allow-sudo-to-another-user-without-password
+http://researchhubs.com/post/computing/linux-cmd/sudo-command.html
+http://researchhubs.com/post/computing/linux-cmd/su-command.html
+https://www.thegeekdiary.com/how-to-setup-a-sudo-switch-to-another-user-that-has-no-password-or-ssh-key-set-in-linux/
+https://www.tecmint.com/switch-user-account-without-password/
+
+=============================================SMBCLIENT=================================================
+https://codingbee.net/rhcsa/samba-how-to-set-up-a-samba-client-on-centos-rhel-7
+https://developer.ibm.com/articles/au-aix_samba/#
+https://developer.ibm.com/technologies/systems/articles/au-aix_samba/
+http://www.perzl.org/aix/index.php%3Fn%3Dmain.samba
+
+====================================================================Password Policy========================
+https://access.redhat.com/solutions/2808101
+
+==========================================================IFIX for IBM===================================
+https://www14.software.ibm.com/webapp/set2/flrt/power 
+https://www14.software.ibm.com/support/customercare/flrt/doc?page=security&os=72sec
+
+=================================================IBM_CPU_Analysis========================================
+https://www.ibm.com/support/pages/node/720643
+-----------=======================================Azure===================================================
+https://docs.microsoft.com/en-us/learn/paths/az-104-administrator-prerequisites/
+https://docs.microsoft.com/en-us/learn/certifications/azure-administrator/?wt.mc_id=esi_lxp_webpage_wwl
+https://www.microsoft.com/en-us/learning/dashboard.aspx
+
+
+======================================CR Details===================
+CHG0067219 - sapdev04
+CHG0067224 - sapxiq02
+
+CHG0068458 - Decomm
+CHG0078936 - IIB
+
+CHG0084846 - Splunk
+=========================================Disk I/O for AIX====================================================
+https://www.ibm.com/docs/en/aix/7.2?topic=performance-monitoring-disk-io
+https://www.ibm.com/support/pages/stress-test-your-aix-or-linux-server-nstress
+https://galileosuite.com/explorer-blog/using-nstress-to-stress-your-system/
+
+=========================================================================NFS_Troubleshoot===========================
+
+https://www.ibm.com/support/pages/ibm-aix-nfs-mount-issue-mount-1831-010-server-not-responding-rpc-1832-015-remote-system-error
+
+======================================================User======================================
+https://www.computernetworkingnotes.com/linux-tutorials/password-aging-policy-explained-with-chage-command.html
+
+=================================================================AIX_Loopmount===================
+http://aix-skills.blogspot.com/2013/02/loopback-device-support-in-aix.html
+https://www.ibm.com/docs/en/aix/7.2?topic=l-loopmount-command
+
+=========================================================Interim-Fix======
+https://www.ibm.com/docs/en/aix/7.1?topic=resources-installing-interim-fix-into-spot-resource
+
+
+PRB0042308
+PRB0042406
+PRB0066935
+========================================================VA-Scan==========================
+https://access.redhat.com/solutions/4072121
+https://access.redhat.com/solutions/4278651
+
+==================================================YUM Repolist=====================
+https://www.cyberithub.com/yum-command-examples/
+
+
+CHG0087287 - nEw P10 setup CR
+
+
+TVF journey.
+Childhood: Ye meri family.
+School: Immature
+First love: flames
+College: Hostel days.
+Relationship: permanent roommates 
+Family trip: tripling.
+Every middle class family: Gullak
+Retirement: Fathers.
+
+===============================================================================================
+http://aix4admins.blogspot.com/2012/06/ifix-interim-fix-or-ifix-previously.html
+for i in `emgr -l | grep "/" | awk '{print $3}'`; do emgr -r -L $i ; done
+
+https://www.ibm.com/support/pages/managing-interim-fixes-aix
+https://www.ibm.com/support/pages/managing-multiple-instances-altinstrootvg-and-applying-fixes-them
+
+http://aix4admins.blogspot.com/2011/09/altdiskcopy-required-filesets-bos.html
+https://www.ibm.com/support/pages/introduction-altcloning-aix-61-and-71
+
+
+useful links:-
+https://www.certdepot.net/rhel7-configure-ldap-directory-service-user-connection/
+https://www.learnitguide.net/2016/01/configure-openldap-server-on-rhel7.html
+
