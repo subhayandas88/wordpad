@@ -1,0 +1,98 @@
+echo "cvai" | kdb | grep vscsi  ...........................To check the Vhost no. of a host command to be run from host.
+
+lsrep .......show repos of OS.
+lsmap -all...........show OPT drive for all hosts.
+
+lsmap -vadapter vhost2 ...........Will show any OPT drive mapped added to the particular host.
+
+mkvdev -fbo -vadapter vhost2........will create an OPT drive to a host.
+ 
+loadopt -vtd vtopt2 -disk AIX71_TL03_SP03_1............will load OS repos on OPT drive.
+ 
+lsvopt ..............will list the optical drives.
+ 
+unloadopt -vtd vtopt2.................unloading the image.
+ 
+rmvdev -vtd vtopt2..................removing the optical drive.
+  
+Mapping of hosts adapter with VIOS
+----------------------------------------
+lsmap -all -npiv...................................To list all VFC connection to lpars
+vfcmap -vadapter vfchost64 -fcp fcs0
+vfcmap -vadapter vfchost65 -fcp fcs1
+
+lsdev -dev vhost33
+lsdev -slots|grep vhost
+lsdev -slots|grep vfchost
+lsmap -vadapter vfchost67 -npiv
+lsdev -Cc adapter|grep fcs
+
+Unmapping of hosts adapter with VIOS
+--------------------------------------
+
+vfcmap -vadapter vfchost66 -fcp 
+vfcmap -vadapter vfchost67 -fcp 
+
+=============================================VIOS Media Repository===================================================
+1)Check the OS ISO image in VIOS serverand permission should be "-rw-r--r-- 1 root staff "
+ls -al /home/padmin/AIX_ISO
+
+2)Creating the new VG for repository
+mkvg -vg med_repos_vg hdisk# 
+
+3)Creating the repository in a new VG
+mkrep -sp med_repos_vg -size 25G
+
+4)Create the virtual media disk 
+mkvopt -name <AIX71_TL03_SP03_1> -file /home/padmin/AIX_ISO/<ISO file nme> -ro
+
+5)Verify the virtual media disk is part of the repository
+lsrep
+
+6)Create the file backed optical device and map it to a vhost
+
+lsmap -vadapter vhost#		==>Shown without the vtopt device 
+mkvdev -fbo -vadapter vhost#	==>Create the vtopt device
+lsmap -vadapter vhost0 		==>Shown with the vtopt device
+
+6)Load the virtual media disk on the vtopt device	
+	
+lsrep
+loadopt -vtd vtopt0 -disk <AIX71_TL03_SP03_1>
+lsrep
+lsmap -vadapter vhost#
+
+7)Boot the client partition from the virtual optical device
+
+8)Install the AIX operating system on client partition
+
+9)Unloading the virtual media disk
+unloadopt -vtd vtopt0 
+
+10)Removing the VM Library 
+
+     A.) Unmap the vtopt# VTDs from the vhost(s) 
+
+$ rmvdev -vtd <VTDname> 
+
+     B.) Remove the virtual media disk(s) from the Virtual Media Repository: 
+
+$ rmvopt -name <name of virtual optical disk> 
+
+     C.) Remove the repository: 
+
+$ rmrep [-f] 
+======================================
+you may follow the below URL
+http://www-01.ibm.com/support/docview.wss?uid=isg3T1013047
+
+
+
+
+
+alt_root_vg -target <new hdisk#> -bundle update_all -location < path to VIOS update package >
+        2>&1|tee alt_root_vg_2231.log
+
+
+
+
