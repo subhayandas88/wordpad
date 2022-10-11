@@ -1,0 +1,103 @@
+bos.sysmgt.nim.client
+
+bos.sysmgt.nim.master
+bos.sysmgt.nim.spot
+-------------------------------------
+	6100-07master_sysb     mksysb                                      
+                   6100-07bid_ow              bosinst_data                
+                   610lpp_res             	     lpp_source                   
+                   610spot_res            	     spot                               
+----------------------------------------
+A)Create the nim on nimvg
+nim_master_setup -a volume_group=nimvg  
+
+B)Patch upgrade through NIM
+
+Step I
+Creating lpp resource through smitty
+
+	smitty nim
+	    Perform NIM Administration Tasks
+		Manage Resources
+		  Define a Resource
+			lpp_source      = source device for optional product images <select>
+
+			   Resource Name	atapelpp_res
+			   Resource Type	lpp_source
+			   Server of Resource 	master
+			   Location of Resource	/tmp/atape
+
+Creating lpp resource through commandline
+mkres -N 'atapelpp_res' -t 'lpp_source' -s 'master' -l '/tmp/atape'
+
+Step II
+
+Install patch to client machine
+
+	smitty nim
+	   Perform NIM Software Installation and Maintenance Tasks
+		 Install and Update Software
+		    Install and Update from ALL Available Software
+
+			nimc            machines        standalone	<select> & <press enter>
+			atapelpp_res     resources      lpp_source	<select> & <press enter>
+			
+			ACCEPT new license agreements?  Yes	<press enter>
+
+
+To take the mksysb backup through NIM master run the command
+
+#nim -o define -t mksysb -a server=master -a location=/backupsvr1 -a source=jpi12db1 -a mk_image=yes -a mksysb_flags=i -a comments="mksysb backup of ides server" jpi12db1_mksysb
+
+Where location = /backupsvr1 is location where mksysb will be created. 
+	  Source=jpi12db1 is the client name.
+
+
+To take the mksysb backup through the NIM client
+
+#mksysb -i -m -e /mnt/mounted_remote_directory/hostname.5208.backup
+
+
+nim -o define -t mksysb -a server=master -a location=/usr/bkp_mksysb/nimc_mksysb -a source=nimc -a mk_image=yes -a mksysb_flags=i -a comments="mksysb backup of ides server" nimc_mksysb
+
+nim -o alt_disk_install -a source=rootvg -a disk=hdisk1 -a set_bootlist=no xyxserver
+
+nim -o alt_disk_install -a source=rootvg -a disk=hdisk1 -a fixes=update_all -a lpp_source=ATX7_TL03_SP04 -a set_bootlist=no -a accept_licenses=yes -a installp_flags="-acNgXY" xyztstinfa001 
+
+======================================================================================================================================================
+
+---------------------------------------Checklist before OS Migration------------------------------------
+
+1.enable rsh,telnet,shell in inetd.conf.
+2.refresh -s inetd
+3.vi .rhosts(xyzniminfa001 root)
+4.smitty user -> root-> allow remote login(rsh)-True
+5.ALL -> for root
+./../usr/lpp/bos/pre_migration
+
+nimadm -j nimadmvg -c trfsapsmp01_infra -s AIX71TL05SP03_spot -l AIX71TL05SP03_lpp -d hdisk1 -Y
+
+---------------------------------------Checklist after OS Migration-------------------------------------
+1.disable rsh,telnet,shell in inetd.conf.
+2.refresh -s inetd
+3.smitty user -> root-> allow remote login(rsh)-False
+
+!RSH,!REXEC,ALL
+---------------------------------------------------------mksysb backup of client through NIM-------------------------------------------------------
+
+nim -o define -t mksysb -a server=master -a location=/mksysb/mksysb_bkp/trfsapsmp01_Cluster -a mk_image=yes -a source=trfsapsmp01_infra _Cluster
+
+nim -o define -t mksysb -a server=master -a location=/mksysb/mksysb_bkp/xyzbpmprda001_infra_mksysb_20180220 -a source=xyzbpmprda001_infra -a mk_image=yes -a mksysb_flags="-i -m -e" -F xyzbpmprda001_infra_mksysb_20180220
+
+To remove a mksysb backup from NIM:-
+nim -Fo remove -a rm_image=yes xyzclsinfa001_Cluster
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+---------------------------------------------------------------Clone Disk----------------------------------------
+/usr/sbin/alt_disk_copy -P all -B -V -d hdisk2
+
+smitty nim_backup_db.............................To do backup of a server through NIM Master.
+
+lsnim -l servername .....................To check NIM instalation.
+
+
