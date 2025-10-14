@@ -1,0 +1,26 @@
+---
+- name: Check HBA status on Linux hosts
+  hosts: all
+  become: yes
+  tasks:
+
+    - name: Gather HBA info using lspci
+      ansible.builtin.shell: |
+        lspci | grep -i fibre
+      register: hba_info
+
+    - name: Display HBA info
+      ansible.builtin.debug:
+        var: hba_info.stdout_lines
+
+    - name: Check HBA port status using systool (if available)
+      ansible.builtin.shell: |
+        systool -c fc_host -v
+      register: hba_status
+      ignore_errors: yes
+
+    - name: Display HBA port status
+      ansible.builtin.debug:
+        var: hba_status.stdout_lines
+
+

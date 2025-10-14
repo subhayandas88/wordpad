@@ -1,0 +1,20 @@
+# GitLab CI pipeline for installing Prometheus on a Linux server
+
+stages:
+  - install
+
+install_prometheus:
+  stage: install
+  tags:
+    - linux
+  script:
+    - wget https://github.com/prometheus/prometheus/releases/latest/download/prometheus-2.49.1.linux-amd64.tar.gz
+    - tar xvf prometheus-2.49.1.linux-amd64.tar.gz
+    - sudo mv prometheus-2.49.1.linux-amd64 /opt/prometheus
+    - sudo useradd --no-create-home --shell /bin/false prometheus || true
+    - sudo chown -R prometheus:prometheus /opt/prometheus
+    - sudo ln -sf /opt/prometheus/prometheus /usr/local/bin/prometheus
+    - sudo ln -sf /opt/prometheus/promtool /usr/local/bin/promtool
+    - echo "Prometheus installed successfully."
+  only:
+    - main
